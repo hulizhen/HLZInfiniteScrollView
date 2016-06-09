@@ -13,6 +13,7 @@
 		2528D9591D0993130071E45B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2528D9571D0993130071E45B /* Main.storyboard */; };
 		2528D95B1D0993130071E45B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2528D95A1D0993130071E45B /* Assets.xcassets */; };
 		2528D95E1D0993130071E45B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2528D95C1D0993130071E45B /* LaunchScreen.storyboard */; };
+		2528D9671D0993760071E45B /* UIScrollView+HLZInfinite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2528D9651D0993760071E45B /* UIScrollView+HLZInfinite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		2528D95A1D0993130071E45B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2528D95D1D0993130071E45B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2528D95F1D0993130071E45B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2528D9651D0993760071E45B /* UIScrollView+HLZInfinite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+HLZInfinite.m"; sourceTree = "<group>"; };
+		2528D9661D0993760071E45B /* UIScrollView+HLZInfinite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+HLZInfinite.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 				2528D9521D0993130071E45B /* AppDelegate.m */,
 				2528D9541D0993130071E45B /* ViewController.h */,
 				2528D9551D0993130071E45B /* ViewController.m */,
+				2528D9651D0993760071E45B /* UIScrollView+HLZInfinite.m */,
+				2528D9661D0993760071E45B /* UIScrollView+HLZInfinite.h */,
 				2528D9571D0993130071E45B /* Main.storyboard */,
 				2528D95A1D0993130071E45B /* Assets.xcassets */,
 				2528D95C1D0993130071E45B /* LaunchScreen.storyboard */,
@@ -149,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2528D9671D0993760071E45B /* UIScrollView+HLZInfinite.m in Sources */,
 				2528D9561D0993130071E45B /* ViewController.m in Sources */,
 				2528D9531D0993130071E45B /* AppDelegate.m in Sources */,
 				2528D9501D0993130071E45B /* main.m in Sources */,
