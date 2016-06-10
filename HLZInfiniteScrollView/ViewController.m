@@ -39,8 +39,8 @@
         [imageViews addObject:imageView];
     }
     
-    self.scrollView.contentViews = imageViews;
     self.scrollView.infinite = YES;
+    self.scrollView.infiniteViews = imageViews;
 }
 
 @end

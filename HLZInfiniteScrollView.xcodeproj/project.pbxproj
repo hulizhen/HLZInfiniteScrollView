@@ -65,8 +65,8 @@
 				2528D9521D0993130071E45B /* AppDelegate.m */,
 				2528D9541D0993130071E45B /* ViewController.h */,
 				2528D9551D0993130071E45B /* ViewController.m */,
-				2528D9651D0993760071E45B /* UIScrollView+HLZInfinite.m */,
 				2528D9661D0993760071E45B /* UIScrollView+HLZInfinite.h */,
+				2528D9651D0993760071E45B /* UIScrollView+HLZInfinite.m */,
 				2528D9571D0993130071E45B /* Main.storyboard */,
 				2528D95A1D0993130071E45B /* Assets.xcassets */,
 				2528D95C1D0993130071E45B /* LaunchScreen.storyboard */,
@@ -115,6 +115,7 @@
 				TargetAttributes = {
 					2528D94A1D0993130071E45B = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = KJ2YJ44DM2;
 					};
 				};
 			};
@@ -271,6 +272,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = HLZInfiniteScrollView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hulizhen.HLZInfiniteScrollView;
@@ -282,6 +284,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = HLZInfiniteScrollView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hulizhen.HLZInfiniteScrollView;
@@ -308,6 +311,7 @@
 				2528D9641D0993130071E45B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
