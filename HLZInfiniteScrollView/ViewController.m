@@ -7,11 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "UIScrollView+HLZInfinite.h"
+#import "HLZInfiniteScrollView.h"
 
 @interface ViewController ()
 
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet HLZInfiniteScrollView *scrollView;
 
 @end
 
@@ -39,8 +39,9 @@
         [imageViews addObject:imageView];
     }
     
-    self.scrollView.infinite = YES;
-    self.scrollView.infiniteViews = imageViews;
+    self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * 3, 220);
+    self.scrollView.infiniteScrollEnabled = YES;
+    self.scrollView.contentViews = imageViews;
 }
 
 @end
