@@ -8,17 +8,21 @@
 
 #import "HLZInfiniteScrollView.h"
 
-@interface HLZInfiniteScrollView ()
+@interface HLZInfiniteScrollView () <UIScrollViewDelegate>
 
 @property (nonatomic, assign) NSInteger leftViewIndex;
 @property (nonatomic, assign) NSInteger centerViewIndex;
 @property (nonatomic, assign) NSInteger rightViewIndex;
 
+@property (nonatomic, strong) NSTimer *timer;
+
+@property (nonatomic, weak) id<HLZInfiniteScrollViewDelegate> userDelegate;
+
 @end
 
 @implementation HLZInfiniteScrollView
 
-#pragma mark - Private Variables
+@dynamic delegate;
 
 #pragma mark - Lifecycle
 
@@ -49,7 +53,15 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    [self reassignViews];
+    if (!self.isInfiniteScrollEnabled) {
+        return;
+    }
+    
+    if (self.contentOffset.x < self.bounds.size.width / 4) {
+        [self reassignViews:YES];
+    } else if (self.contentOffset.x > self.bounds.size.width * 7/4) {
+        [self reassignViews:NO];
+    }
 }
 
 #pragma mark - Accessors
@@ -58,12 +70,95 @@
     _contentViews = contentViews;
 }
 
+- (void)setAutoScrollTimerInterval:(NSTimeInterval)autoScrollTimerInterval {
+    _autoScrollTimerInterval = autoScrollTimerInterval;
+    [self resetTimer];
+}
+
+- (void)setDelegate:(id<HLZInfiniteScrollViewDelegate>)delegate {
+    _userDelegate = delegate;
+}
+
+- (id<HLZInfiniteScrollViewDelegate>)delegate {
+    return _userDelegate;
+}
+
+- (void)setAutoScrollEnabled:(BOOL)autoScrollEnabled {
+    _autoScrollEnabled = autoScrollEnabled;
+    if (autoScrollEnabled) {
+        [self startTimer];
+    } else {
+        [self stopTimer];
+    }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self resetTimer];
+    
+    if ([self.userDelegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
+        [self.userDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+    }
+}
+
+#pragma mark - Message Forwarding
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
+    if ([self.userDelegate respondsToSelector:[anInvocation selector]]) {
+        [anInvocation invokeWithTarget:self.userDelegate];
+    } else {
+        [super forwardInvocation:anInvocation];
+    }
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
+    NSMethodSignature *signature = [super methodSignatureForSelector:aSelector];
+    if (!signature) {
+        signature = [(NSObject *)self.userDelegate methodSignatureForSelector:aSelector];
+    }
+    return signature;
+}
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    return [[self class] instancesRespondToSelector:(aSelector)] || [self.userDelegate respondsToSelector:aSelector];
+}
+
 #pragma mark - Helpers
 
 - (void)setUp {
     self.leftViewIndex = 0;
     self.centerViewIndex = 1;
     self.rightViewIndex = 2;
+    
+    self.autoScrollTimerInterval = 5.0;
+    self.autoScrollAnimationDuration = 0.5;
+    self.autoScrollLeftShift = YES;
+    
+    self.pagingEnabled = YES;
+    
+    super.delegate = self;
+    
+    [self startTimer];
+}
+
+- (void)stopTimer {
+    [self.timer invalidate];
+}
+
+- (void)startTimer {
+    if (self.isAutoScrollEnabled && ![self.timer isValid]) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:self.autoScrollTimerInterval
+                                                      target:self
+                                                    selector:@selector(shiftViews)
+                                                    userInfo:nil
+                                                     repeats:YES];
+    }
+}
+
+- (void)resetTimer {
+    [self stopTimer];
+    [self startTimer];
 }
 
 - (NSInteger)increaseViewIndex:(NSInteger)index {
@@ -76,13 +171,7 @@
     return (index < 0) ? index += self.contentViews.count : index;
 }
 
-- (void)reassignViews {
-    if (self.contentOffset.x >= self.bounds.size.width / 4 &&
-        self.contentOffset.x <= self.bounds.size.width * 7/4) {
-        // It's not the time to reassign views to container views, do nothing.
-        return;
-    }
-    
+- (void)reassignViews:(BOOL)leftShift {
     UIView *leftView = self.contentViews[self.leftViewIndex];
     UIView *centerView = self.contentViews[self.centerViewIndex];
     UIView *rightView = self.contentViews[self.rightViewIndex];
@@ -92,7 +181,7 @@
     [rightView removeFromSuperview];
     
     // Update the contentOffset of scroll view and indexes of views.
-    if (self.contentOffset.x < self.bounds.size.width / 4) {
+    if (leftShift) {
         self.contentOffset = CGPointMake(self.contentOffset.x + self.bounds.size.width, 0);
         
         self.leftViewIndex = [self decreaseViewIndex:self.leftViewIndex];
@@ -114,11 +203,20 @@
     [self addSubview:self.contentViews[self.centerViewIndex]];
     [self addSubview:self.contentViews[self.rightViewIndex]];
     
-    // Set the views' frame.
     CGSize size = self.bounds.size;
     leftView.frame = CGRectMake(0, 0, size.width, size.height);
     centerView.frame = CGRectOffset(leftView.frame, size.width, 0);
     rightView.frame = CGRectOffset(centerView.frame, size.width, 0);
+}
+
+- (void)shiftViews {
+    [UIView animateWithDuration:0.5 animations:^{
+        if (self.isAutoScrollLeftShift) {
+            self.contentOffset = CGPointMake(self.bounds.size.width * 2, self.contentOffset.y);
+        } else {
+            self.contentOffset = CGPointMake(0, self.contentOffset.y);
+        }
+    }];
 }
 
 @end
