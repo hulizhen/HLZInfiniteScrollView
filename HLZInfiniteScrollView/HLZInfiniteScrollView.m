@@ -51,6 +51,8 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    [self updateViewFrames];
+    
     if (!self.isInfiniteScrollEnabled) {
         return;
     }
@@ -165,6 +167,17 @@
     rightView.frame = CGRectOffset(centerView.frame, size.width, 0);
     
     [self resetTimer];
+}
+
+- (void)updateViewFrames {
+    UIView *leftView = self.contentViews[self.leftViewIndex];
+    UIView *centerView = self.contentViews[self.centerViewIndex];
+    UIView *rightView = self.contentViews[self.rightViewIndex];
+
+    CGSize size = self.bounds.size;
+    leftView.frame = CGRectMake(0, 0, size.width, size.height);
+    centerView.frame = CGRectOffset(leftView.frame, size.width, 0);
+    rightView.frame = CGRectOffset(centerView.frame, size.width, 0);
 }
 
 - (void)shiftViews {
