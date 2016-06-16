@@ -8,15 +8,13 @@
 
 #import "HLZInfiniteScrollView.h"
 
-@interface HLZInfiniteScrollView () <UIScrollViewDelegate>
+@interface HLZInfiniteScrollView ()
 
 @property (nonatomic, assign) NSInteger leftViewIndex;
 @property (nonatomic, assign) NSInteger centerViewIndex;
 @property (nonatomic, assign) NSInteger rightViewIndex;
 
 @property (nonatomic, strong) NSTimer *timer;
-
-@property (nonatomic, weak) id<HLZInfiniteScrollViewDelegate> userDelegate;
 
 @end
 
@@ -75,14 +73,6 @@
     [self resetTimer];
 }
 
-- (void)setDelegate:(id<HLZInfiniteScrollViewDelegate>)delegate {
-    _userDelegate = delegate;
-}
-
-- (id<HLZInfiniteScrollViewDelegate>)delegate {
-    return _userDelegate;
-}
-
 - (void)setAutoScrollEnabled:(BOOL)autoScrollEnabled {
     _autoScrollEnabled = autoScrollEnabled;
     if (autoScrollEnabled) {
@@ -90,38 +80,6 @@
     } else {
         [self stopTimer];
     }
-}
-
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    [self resetTimer];
-    
-    if ([self.userDelegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
-        [self.userDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
-    }
-}
-
-#pragma mark - Message Forwarding
-
-- (void)forwardInvocation:(NSInvocation *)anInvocation {
-    if ([self.userDelegate respondsToSelector:[anInvocation selector]]) {
-        [anInvocation invokeWithTarget:self.userDelegate];
-    } else {
-        [super forwardInvocation:anInvocation];
-    }
-}
-
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
-    NSMethodSignature *signature = [super methodSignatureForSelector:aSelector];
-    if (!signature) {
-        signature = [(NSObject *)self.userDelegate methodSignatureForSelector:aSelector];
-    }
-    return signature;
-}
-
-- (BOOL)respondsToSelector:(SEL)aSelector {
-    return [[self class] instancesRespondToSelector:(aSelector)] || [self.userDelegate respondsToSelector:aSelector];
 }
 
 #pragma mark - Helpers
@@ -136,8 +94,6 @@
     self.autoScrollLeftShift = YES;
     
     self.pagingEnabled = YES;
-    
-    super.delegate = self;
     
     [self startTimer];
 }
@@ -207,6 +163,8 @@
     leftView.frame = CGRectMake(0, 0, size.width, size.height);
     centerView.frame = CGRectOffset(leftView.frame, size.width, 0);
     rightView.frame = CGRectOffset(centerView.frame, size.width, 0);
+    
+    [self resetTimer];
 }
 
 - (void)shiftViews {
