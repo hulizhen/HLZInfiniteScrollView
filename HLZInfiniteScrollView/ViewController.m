@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "HLZInfiniteScrollView.h"
 
-@interface ViewController () <HLZInfiniteScrollViewDelegate>
+@interface ViewController ()
 
 @property (nonatomic, weak) IBOutlet HLZInfiniteScrollView *scrollView;
 
@@ -44,7 +44,7 @@
     self.scrollView.infiniteScrollEnabled = YES;
     self.scrollView.contentViews = imageViews;
     self.scrollView.autoScrollEnabled = YES;
-    self.scrollView.autoScrollTimerInterval = 1.0;
+    self.scrollView.autoScrollTimerInterval = 0.3;
     self.scrollView.autoScrollLeftShift = YES;
 }
 

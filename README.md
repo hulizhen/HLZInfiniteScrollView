@@ -1,16 +1,22 @@
 HLZInfiniteScrollView
 ---------------------
-This library provides a category for UIScrollView with support for being scrolled infinitely.
-![hlzinfinitescrollview](https://cloud.githubusercontent.com/assets/2831422/15956191/63a934e8-2f19-11e6-92c2-b2e615d7957c.gif)
+This library provides a subclass of UIScrollView with support for being scrolled infinitely and automatically.
+![hlzinfinitescrollview](https://cloud.githubusercontent.com/assets/2831422/16170851/b47d475e-3592-11e6-8bbf-5a49ccd06e62.gif)
 
 How To Use
 ----------
-Copy the interface and implementation files of the category into your project and include the `UIScrollView+HLZInfinite.h`.
+Copy the interface and implementation files into your project and include the `HLZInfiniteScrollView.h`.
 
 ```objective-c
-#import "UIScrollView+HLZInfinite.h"
+#import "HLZInfiniteScrollView.h"
 
-...
+@interface ViewController ()
+
+@property (nonatomic, weak) IBOutlet HLZInfiniteScrollView *scrollView;
+
+@end
+
+@implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,9 +30,16 @@ Copy the interface and implementation files of the category into your project an
         [views addObject:view];
     }
 
-    self.scrollView.infinite = YES;     
-    self.scrollView.infiniteViews = views;
+    self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * 3, 220);
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.infiniteScrollEnabled = YES;
+    self.scrollView.contentViews = imageViews;
+    self.scrollView.autoScrollEnabled = YES;
+    self.scrollView.autoScrollTimerInterval = 0.3;
+    self.scrollView.autoScrollLeftShift = YES;
 }
+
+@end
 ```
 
 Check out the demo project to see the details.
