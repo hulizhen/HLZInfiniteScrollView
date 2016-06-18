@@ -24,14 +24,6 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self setUp];
-    }
-    return self;
-}
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -57,9 +49,9 @@
         return;
     }
     
-    if (self.contentOffset.x < self.bounds.size.width / 4) {
+    if (self.contentOffset.x < self.bounds.size.width / 5) {
         [self reassignViews:YES];
-    } else if (self.contentOffset.x > self.bounds.size.width * 7/4) {
+    } else if (self.contentOffset.x > self.bounds.size.width * 9/5) {
         [self reassignViews:NO];
     }
 }
@@ -84,12 +76,6 @@
     }
 }
 
-- (void)setCenterViewIndex:(NSInteger)centerViewIndex {
-    [self willChangeValueForKey:@"currentViewIndex"];
-    _centerViewIndex = centerViewIndex;
-    [self didChangeValueForKey:@"currentViewIndex"];
-}
-
 - (NSInteger)currentViewIndex {
     return self.centerViewIndex;
 }
@@ -102,7 +88,6 @@
     self.rightViewIndex = 2;
     
     self.autoScrollTimerInterval = 5.0;
-    self.autoScrollAnimationDuration = 0.5;
     self.autoScrollLeftShift = YES;
     
     self.pagingEnabled = YES;
@@ -191,13 +176,11 @@
 }
 
 - (void)shiftViews {
-    [UIView animateWithDuration:0.5 animations:^{
-        if (self.isAutoScrollLeftShift) {
-            self.contentOffset = CGPointMake(self.bounds.size.width * 2, self.contentOffset.y);
-        } else {
-            self.contentOffset = CGPointMake(0, self.contentOffset.y);
-        }
-    }];
+    if (self.isAutoScrollLeftShift) {
+        [self setContentOffset:CGPointMake(self.bounds.size.width * 2, self.contentOffset.y) animated:YES];
+    } else {
+        [self setContentOffset:CGPointMake(0, self.contentOffset.y) animated:YES];
+    }
 }
 
 @end

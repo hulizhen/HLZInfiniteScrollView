@@ -44,8 +44,7 @@
     self.scrollView.infiniteScrollEnabled = YES;
     self.scrollView.contentViews = imageViews;
     self.scrollView.autoScrollEnabled = YES;
-    self.scrollView.autoScrollTimerInterval = 2.0;
-    self.scrollView.autoScrollAnimationDuration = 0.5;
+    self.scrollView.autoScrollTimerInterval = 1.0;
     self.scrollView.autoScrollLeftShift = YES;
 }
 
