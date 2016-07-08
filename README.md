@@ -1,9 +1,7 @@
 
 HLZInfiniteScrollView
 ---------------------
-This library provides a subclass of UIScrollView with support for being scrolled infinitely and automatically.
-
-![hlzinfinitescrollview](https://cloud.githubusercontent.com/assets/2831422/16690475/bd7bc43e-455a-11e6-84da-c2a4814d8ab7.gif)
+This library provides a scroll view which can be scrolled infinitely and automatically.
 
 How To Use
 ----------
