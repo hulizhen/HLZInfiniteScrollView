@@ -3,7 +3,7 @@ HLZInfiniteScrollView
 ---------------------
 This library provides a scroll view, which can be scrolled infinitely and automatically, by making use of UICollectionView.
 
- ![HLZInfiniteScrollView](/Users/hulz/Developer/Misc/HLZInfiniteScrollView.gif)
+![hlzinfinitescrollview](https://cloud.githubusercontent.com/assets/2831422/16691969/7bef5aec-4561-11e6-9163-2dae603c0635.gif)
 
 How To Use
 ----------
