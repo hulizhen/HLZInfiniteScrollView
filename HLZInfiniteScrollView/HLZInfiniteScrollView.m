@@ -56,13 +56,13 @@ static NSString * const CellReuseIdentifier = @"HLZCell";
     // and appending the first object of original contentViews to the working version of contentViews.
     // Thus, the item number of working version always has two more than the original version.
     self.workingContentViews = [_contentViews mutableCopy];
-    [self.workingContentViews insertObject:self.contentViews.lastObject atIndex:0];
-    [self.workingContentViews addObject:self.contentViews.firstObject];
+    [self.workingContentViews insertObject:_contentViews.lastObject atIndex:0];
+    [self.workingContentViews addObject:_contentViews.firstObject];
     
     [self.containerView reloadData];
     
     // Update the number of pages and current page.
-    self.pageControl.numberOfPages = contentViews.count;
+    self.pageControl.numberOfPages = _contentViews.count;
     self.pageControl.currentPage = 0;
     
     [self.containerView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]
