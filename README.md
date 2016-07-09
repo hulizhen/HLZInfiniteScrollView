@@ -5,9 +5,38 @@ This library provides a scroll view, which can be scrolled infinitely and automa
 
 ![hlzinfinitescrollview](https://cloud.githubusercontent.com/assets/2831422/16691969/7bef5aec-4561-11e6-9163-2dae603c0635.gif)
 
-How To Use
-----------
+
+
+# How to use
+
+## Using CocoaPods
+
+[CocoaPods Get Started](http://cocoapods.org/#get_started)
+
+Create `Podfile`:
+
+```ruby
+platform :ios, '8.0'
+
+target 'YourTarget' do
+
+pod 'HLZInfiniteScrollView', '~>1.0'
+
+end
+```
+
+If you are using Swift, add `use_frameworks!`:
+
+```ruby
+platform :ios, '8.0'
+use_frameworks!
+```
+
+## Copying files into your project
+
 Copy the interface and implementation files into your project and include the `HLZInfiniteScrollView.h`.
+
+## Demo
 
 ```objective-c
 #import "HLZInfiniteScrollView.h"
