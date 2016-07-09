@@ -32,6 +32,7 @@ Copy the interface and implementation files into your project and include the `H
         [views addObject:view];
     }
 
+    self.scrollView.pageControlEnabled = YES;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.autoScrollEnabled = YES;
     self.scrollView.autoScrollTimerInterval = 5.0;
