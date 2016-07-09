@@ -39,6 +39,7 @@
         [imageViews addObject:imageView];
     }
     
+    self.scrollView.pageControlEnabled = YES;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.autoScrollEnabled = YES;
     self.scrollView.autoScrollTimerInterval = 0.8;
