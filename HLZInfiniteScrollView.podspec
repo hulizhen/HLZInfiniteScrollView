@@ -8,19 +8,12 @@
 
 Pod::Spec.new do |s|
 
-  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  These will help people to find your library, and whilst it
-  #  can feel like a chore to fill in it's definitely to your advantage. The
-  #  summary should be tweet-length, and the description more in depth.
-  #
-
   s.name         = "HLZInfiniteScrollView"
   s.version      = "1.0.0"
-  s.summary      = "An Objective-C class providing a scroll view which can be scrolled infinitely and automatically."
+  s.summary      = "An infinite scroll view."
 
   s.description  = <<-DESC
-                      Infinite scroll view.
+                      An Objective-C class providing a scroll view which can be scrolled infinitely and automatically.
                    DESC
 
   s.homepage     = "https://github.com/hulizhen/HLZInfiniteScrollView"
@@ -31,7 +24,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "7.0"
 
-  s.source       = { :git => "https://github.com/hulizhen/HLZInfiniteScrollView", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/hulizhen/HLZInfiniteScrollView.git", :tag => "#{s.version}" }
   s.source_files = "HLZInfiniteScrollView", "HLZInfiniteScrollView/HLZInfiniteScrollView.{h,m}"
   s.requires_arc = true
 
