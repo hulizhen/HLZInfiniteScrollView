@@ -9,8 +9,8 @@
 Pod::Spec.new do |s|
 
   s.name         = "HLZInfiniteScrollView"
-  s.version      = "1.0.0"
-  s.summary      = "An infinite scroll view."
+  s.version      = "1.0.1"
+  s.summary      = "A scroll view which can be scrolled infinitely and automatically."
 
   s.description  = <<-DESC
                       An Objective-C class providing a scroll view which can be scrolled infinitely and automatically.
